@@ -1,0 +1,73 @@
+
+connect sys/manager  as sysdba
+drop user yoon cascade;
+create user yoon identified by yoon
+default tablespace users
+temporary tablespace temp;
+
+grant connect,resource to yoon;
+
+connect yoon/yoon
+
+=======회원 테이블================
+create table member(
+   userid varchar2(10) PRIMARY KEY,
+   passwd varchar2(10),
+   name varchar2(20),
+   juminnum char(6),
+   phone varchar2(20),
+   address varchar2(30)
+   );
+======================================
+insert into member(userid, passwd,name, phone) values('admin','admin','관리자','1234');
+insert into member(userid, passwd,name, phone) values('choi','1234','최윤녕', '8686'); 
+insert into member(userid, passwd,name, phone) values('yoob','1234','최윤혁', '1323'); 
+commit;
+========도서 테이블================
+create table books(
+num number, 
+title varchar2(30),
+writer varchar2(30),
+publisher varchar2(30),
+contents varchar2(50),
+code varchar2(10) PRIMARY KEY,
+status number 
+);
+=======================================
+insert into books(num, title, writer,publisher,code,status) values(1,'프랑스아이처럼','이지선','한빛','b1',0);
+insert into books(num, title, writer,publisher,code,status) values(2,'자바웹프로그래밍','황희정','한빛','b2',0);
+insert into books(num, title, writer,publisher,code,status) values(3,'자료구조','김영우','대한','b3',0);
+insert into books(num, title, writer,publisher,code,status) values(4,'어떤하루','신준모','프롬북스','b4',0);
+insert into books(num, title, writer,publisher,code,status) values(5,'기적','정은궐','리북스','b5',0);
+insert into books(num, title, writer,publisher,code,status) values(6,'편의점인간','무라타사야카','북스','b6',0);
+insert into books(num, title, writer,publisher,code,status) values(7,'달콤한인생','김성한','리틀','b7',0);
+insert into books(num, title, writer,publisher,code,status) values(8,'우주일지','신동욱','프롬북스','b8',0);
+insert into books(num, title, writer,publisher,code,status) values(9,'자존감수업','윤홍균','심플라프','b9',0);
+insert into books(num, title, writer,publisher,code,status) values(10,'너의봄은맛있니','김연희','자음과모음','b10',0);
+insert into books(num, title, writer,publisher,code,status) values(11,'3배속살림법','조윤경','스타일북스','b11',0);
+insert into books(num, title, writer,publisher,code,status) values(12,'오리지널스','애덤그랜트','한국경제신문','b12',0);
+insert into books(num, title, writer,publisher,code,status) values(13,'나에게고맙다','전승환','허밍버드','b13',0);
+===============================================
+===========대출 테이블=======================
+create table lent(
+lent_id number PRIMARY KEY, 
+code varchar2(10),
+userid varchar2(10),
+lent_date date,
+ret_date date,
+status number
+);
+insert into lent(lent_id) values(0);
+commit;
+============게시판 테이블==========================
+create table Boardbook (
+b_id number PRIMARY KEY,
+userid varchar2(20),
+b_title varchar2(15),
+b_passwd varchar2(6),
+b_date date,
+b_contents varchar2(500)
+);
+insert into boardbook values(1, 'admin','안녕하세요','admin',sysdate,'문의사항이 있으면 언제든지 글을 남겨주세요^_^');
+
+===================================================================================================================
